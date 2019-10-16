@@ -48,7 +48,7 @@ while True:
         cpt2 = (y + (y+h)) // 2
         cv2.rectangle(frame,pt1,pt2,(0,255,0),3)
         cv2.putText(frame,'X = ' + str(cpt1) + 'Y = ' + str(cpt2),(200,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),3)
-        cv2.circle(frame,(cpt1,cpt2),3,(255,0,0),3)
+        cv2.circle(frame,(cpt1,cpt2),1,(255,0,0),1)
 
     else:
         cv2.putText(frame,"Failure to Detect Tracking!!",(100,200),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),3)
