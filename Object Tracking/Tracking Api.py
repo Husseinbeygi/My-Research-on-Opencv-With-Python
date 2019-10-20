@@ -1,4 +1,5 @@
 import cv2
+from datetime import datetime
 
 def ask_for_tracker():
     print("0 --------> BOOSTING: ")
@@ -25,7 +26,7 @@ def ask_for_tracker():
 tracker = ask_for_tracker()
 tracker_name = str(tracker).split()[0][1:]
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 
 ret, frame = cap.read()
 
@@ -54,7 +55,8 @@ while True:
         cv2.putText(frame,"Failure to Detect Tracking!!",(100,200),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),3)
 
     cv2.putText(frame,tracker_name,(20,400),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),3)
-
+    time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+    cv2.putText(frame,time,(20,450),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),3)
     cv2.imshow(tracker_name,frame)
 
     k = cv2.waitKey(1) & 0xFF
