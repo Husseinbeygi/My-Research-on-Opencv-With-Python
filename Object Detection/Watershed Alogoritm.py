@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 ### load Images
-Original = cv2.imread('DATA/8.jpg')
+Original = cv2.imread('DATA/6.jpg')
 
 # Make Copy of Image 
 Copy_image = np.copy(Original)

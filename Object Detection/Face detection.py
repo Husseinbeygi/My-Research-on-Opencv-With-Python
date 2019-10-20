@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 # Add Cascade Classifier
-face_cass = cv2.CascadeClassifier('DATA/haarcascade/haarcascade_frontalface_default.xml')
+face_cass = cv2.CascadeClassifier('DATA/haarcascade/haarcascade_eye.xml')
 
 ## Face Detection Function
 def face_detection(img):

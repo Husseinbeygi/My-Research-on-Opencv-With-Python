@@ -12,59 +12,6 @@ Target = cv2.cvtColor(Target,cv2.COLOR_BGR2GRAY)
 # ret,thresh = cv2.threshold(frame,(frame.max() /2),frame.max(),cv2.THRESH_BINARY)
 Original = cv2.adaptiveThreshold(Original,Original.max(),cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,8)
 Target = cv2.adaptiveThreshold(Target,Target.max(),cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,8)
-
-###############################################
-############### ORB FEATURE MATCHING #########
-###############################################
-
-### Create ORB Function
-orb = cv2.ORB_create()
-kp1, des1 = orb.detectAndCompute(Original, None)
-kp2, des2 = orb.detectAndCompute(Target, None)
-
-### Create bf Matcher
-bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-# find matches
-matches = bf.match(des1, des2)
-matches = sorted(matches, key=lambda x: x.distance)
-bf_matches = cv2.drawMatches(Original, kp1, Target, kp2, matches[:25], None, flags=2)
-
-plt.imshow(bf_matches)
-plt.title('ORB FEATURE MATCHING')
-plt.show()
-
-###############################################
-############### SIFT FEATURE MATCHING #########
-###############################################
-
-### Create SIFT Function
-sift = cv2.xfeatures2d.SIFT_create()
-kp1, des1 = sift.detectAndCompute(Original, None)
-kp2, des2 = sift.detectAndCompute(Target, None)
-
-### Create bf Matcher
-bf = cv2.BFMatcher()
-# find matches
-matches = bf.knnMatch(des1, des2, k=2)
-
-### RATIO MATCH1 < 75% MATCH 2
-goodmatches = []
-
-for match1, match2 in matches:
-
-    if match1.distance < 0.75 * match2.distance:
-        goodmatches.append([match1])
-
-sift_matches = cv2.drawMatchesKnn(Original, kp1, Target, kp2, goodmatches, None, flags=2)
-
-plt.imshow(sift_matches)
-plt.title('SIFT FEATURE MATCHING')
-plt.show()
-
-###############################################
-#### FLANN FEATURE MATCHING With Mask #########
-###############################################
-
 ### Create SIFT Function
 sift = cv2.xfeatures2d.SIFT_create()
 kp1, des1 = sift.detectAndCompute(Original, None)
