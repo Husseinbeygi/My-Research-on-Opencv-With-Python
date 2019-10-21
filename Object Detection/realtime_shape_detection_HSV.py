@@ -7,7 +7,7 @@ def nothing(x):
     # any operation
     pass
 
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("LH", "Trackbars", 0, 180, nothing)
@@ -60,7 +60,7 @@ while True:
         biggest_contour = max(contour_sizes, key=lambda x: x[0])[1]
     else:
         fs = frame.shape
-        cv2.putText(O_frame,"No Contour Detected",(fs[0]//3,fs[1]//2),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),6)
+        cv2.putText(O_frame,"No Object Detected",(fs[0]//3,fs[1]//2),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),6)
     # computes the bounding box for the contour, and draws it on the frame, 
     # Here, bounding rectangle is drawn with minimum area, so it considers the rotation also.
     # The function used is cv2.minAreaRect(). It returns a Box2D structure which contains following detals 
